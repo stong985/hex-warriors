@@ -6,308 +6,317 @@
 <title>Hex Warriors 占城大师</title>
 <style>
 *{margin:0;padding:0;box-sizing:border-box;-webkit-tap-highlight-color:transparent;user-select:none}
-html,body{width:100%;height:100%;overflow:hidden;font-family:'Segoe UI',system-ui,-apple-system,sans-serif;background:#1a1a2e;color:#eee;touch-action:manipulation}
-#app{width:100%;height:100%;display:flex;flex-direction:column;max-width:500px;margin:0 auto;position:relative}
+html,body{width:100%;height:100%;overflow:hidden;font-family:'Segoe UI',system-ui,-apple-system,sans-serif;background:#0f0c29;color:#eee;touch-action:manipulation}
 
-/* ===== MENU SCREEN ===== */
-#menuScreen{position:absolute;top:0;left:0;right:0;bottom:0;z-index:100;display:flex;flex-direction:column;align-items:center;justify-content:center;background:linear-gradient(135deg,#0f0c29,#1a1a2e,#16213e);overflow:hidden}
+#app{width:100%;height:100%;display:flex;flex-direction:column;max-width:500px;margin:0 auto;position:relative;background:linear-gradient(135deg,#0f0c29,#1a1a2e,#16213e)}
+
+/* ===== MENU ===== */
+#menuScreen{position:absolute;top:0;left:0;right:0;bottom:0;z-index:100;display:flex;flex-direction:column;align-items:center;justify-content:center;background:linear-gradient(135deg,#0f0c29,#1a1a2e,#16213e)}
 #menuScreen.hidden{display:none}
-#menuScreen .bg-hex{position:absolute;width:200%;height:200%;background:radial-gradient(circle at 30% 40%,rgba(78,204,163,0.06) 0%,transparent 50%),radial-gradient(circle at 70% 60%,rgba(233,69,96,0.06) 0%,transparent 50%);animation:pulse 6s ease-in-out infinite}
-@keyframes pulse{0%,100%{opacity:0.5}50%{opacity:1}}
-#menuScreen .logo-area{text-align:center;z-index:2;margin-bottom:12px}
-#menuScreen .logo-icon{font-size:72px;margin-bottom:4px;display:block;filter:drop-shadow(0 4px 20px rgba(78,204,163,0.3))}
-#menuScreen .logo-title{font-size:36px;font-weight:900;background:linear-gradient(135deg,#4ecca3,#e94560);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;letter-spacing:2px;text-shadow:none}
-#menuScreen .logo-sub{font-size:14px;color:#888;letter-spacing:4px;margin-top:2px;text-transform:uppercase}
-#menuScreen .menu-buttons{display:flex;flex-direction:column;gap:12px;z-index:2;width:200px;margin-top:20px}
-.menu-btn{display:flex;align-items:center;justify-content:center;gap:8px;padding:14px 0;border-radius:12px;font-size:16px;font-weight:700;border:none;cursor:pointer;transition:all 0.2s;letter-spacing:2px}
+#menuScreen .logo-icon{font-size:64px;margin-bottom:2px}
+#menuScreen .logo-title{font-size:32px;font-weight:900;background:linear-gradient(135deg,#4ecca3,#e94560);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;letter-spacing:2px}
+#menuScreen .logo-sub{font-size:13px;color:#666;letter-spacing:4px;margin-bottom:16px}
+.menu-buttons{display:flex;flex-direction:column;gap:10px;width:180px}
+.menu-btn{padding:12px 0;border-radius:10px;font-size:15px;font-weight:700;border:none;cursor:pointer;letter-spacing:2px;transition:.15s}
 .menu-btn:active{transform:scale(0.95)}
-.menu-btn.primary{background:linear-gradient(135deg,#4ecca3,#3ab889);color:#1a1a2e;box-shadow:0 4px 20px rgba(78,204,163,0.3)}
-.menu-btn.secondary{background:rgba(255,255,255,0.08);color:#ccc;border:1px solid rgba(255,255,255,0.12)}
+.menu-btn.primary{background:linear-gradient(135deg,#4ecca3,#3ab889);color:#1a1a2e}
+.menu-btn.secondary{background:rgba(255,255,255,0.08);color:#bbb;border:1px solid rgba(255,255,255,0.12)}
 .menu-btn.tertiary{background:rgba(233,69,96,0.15);color:#e94560;border:1px solid rgba(233,69,96,0.25)}
-#menuScreen .version{position:absolute;bottom:16px;font-size:10px;color:#555;z-index:2}
+.menu-btn .badge{font-size:10px;background:#e94560;color:#fff;border-radius:8px;padding:1px 6px;margin-left:6px}
 
-/* ===== SHOP SCREEN ===== */
+/* ===== SHOP ===== */
 #shopScreen{display:none;position:absolute;top:0;left:0;right:0;bottom:0;z-index:90;flex-direction:column;background:linear-gradient(135deg,#0f0c29,#1a1a2e,#16213e)}
 #shopScreen.show{display:flex}
-#shopScreen .shop-header{display:flex;align-items:center;padding:16px;gap:12px;border-bottom:1px solid rgba(255,255,255,0.08)}
-#shopScreen .shop-back{font-size:24px;cursor:pointer;padding:4px 8px;border-radius:8px;background:rgba(255,255,255,0.06);border:none;color:#fff}
-#shopScreen .shop-title{font-size:18px;font-weight:700;color:#f0c040}
-#shopScreen .shop-list{padding:16px;flex:1;overflow-y:auto;display:flex;flex-direction:column;gap:12px}
-.shop-item{display:flex;align-items:center;gap:12px;padding:12px 14px;border-radius:12px;background:rgba(255,255,255,0.05);border:1px solid rgba(255,255,255,0.08)}
-.shop-item .item-icon{font-size:32px}
+.shop-header{display:flex;align-items:center;padding:12px 14px;gap:10px;border-bottom:1px solid rgba(255,255,255,0.08)}
+.shop-back{font-size:22px;cursor:pointer;background:rgba(255,255,255,0.06);border:none;color:#fff;padding:4px 10px;border-radius:8px}
+.shop-title{font-size:17px;font-weight:700;color:#f0c040}
+.shop-list{padding:12px;flex:1;overflow-y:auto;display:flex;flex-direction:column;gap:10px}
+.shop-item{display:flex;align-items:center;gap:10px;padding:10px 12px;border-radius:10px;background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.06)}
+.shop-item .item-icon{font-size:28px}
 .shop-item .item-info{flex:1}
-.shop-item .item-name{font-size:14px;font-weight:600;color:#eee}
-.shop-item .item-desc{font-size:11px;color:#888;margin-top:2px}
-.shop-item .item-price{padding:6px 14px;border-radius:8px;background:linear-gradient(135deg,#f0c040,#d4a030);color:#1a1a2e;font-weight:700;font-size:13px;border:none;cursor:pointer}
+.shop-item .item-name{font-size:13px;font-weight:600}
+.shop-item .item-desc{font-size:10px;color:#777;margin-top:1px}
+.shop-item .item-price{padding:5px 12px;border-radius:6px;background:linear-gradient(135deg,#f0c040,#d4a030);color:#1a1a2e;font-weight:700;font-size:12px;border:none;cursor:pointer}
 
-/* ===== GAME UI ===== */
+/* ===== GAME ===== */
 #gameUI{display:none;flex-direction:column;width:100%;height:100%}
 #gameUI.show{display:flex}
 
-#topBar{display:flex;justify-content:space-between;align-items:center;padding:8px 12px;background:linear-gradient(135deg,#16213e,#0f3460);border-bottom:2px solid #e94560;flex-shrink:0;z-index:10}
-#topBar .turnInfo{font-size:14px;font-weight:600}
-#topBar .turnInfo .playerName{color:#4ecca3}
-#topBar .turnInfo .enemyName{color:#e94560}
-#topBar .phase{font-size:12px;padding:3px 10px;border-radius:10px;background:#533483;color:#fff}
-#topBar .back-btn{font-size:18px;cursor:pointer;padding:2px 6px;border-radius:6px;background:rgba(255,255,255,0.06);border:none;color:#aaa}
+#topBar{display:flex;justify-content:space-between;align-items:center;padding:6px 10px;background:rgba(15,12,41,0.95);border-bottom:1px solid rgba(233,69,96,0.3);flex-shrink:0;z-index:10}
+#topBar .turnInfo{font-size:13px;font-weight:600}
+#topBar .turnInfo .pName{color:#4ecca3}
+#topBar .turnInfo .eName{color:#e94560}
+#topBar .phase{font-size:11px;padding:2px 8px;border-radius:8px;background:#533483;color:#fff}
+#topBar .back-btn{font-size:16px;cursor:pointer;background:rgba(255,255,255,0.06);border:none;color:#aaa;padding:2px 8px;border-radius:6px;line-height:1}
 
-#resources{display:flex;justify-content:space-around;padding:6px 10px;background:#16213e;flex-shrink:0;font-size:13px;z-index:10}
-#resources .res{display:flex;align-items:center;gap:4px}
-#resources .res .icon{font-size:16px}
-#resources .res .val{font-weight:700}
+#bottomBar{display:flex;justify-content:space-around;align-items:center;padding:5px 4px;background:rgba(15,12,41,0.95);border-top:1px solid rgba(83,52,131,0.3);flex-shrink:0;z-index:10}
+.unitBtn{display:flex;flex-direction:column;align-items:center;justify-content:center;min-width:52px;padding:3px 4px;border-radius:8px;background:rgba(255,255,255,0.06);border:1px solid rgba(255,255,255,0.1);color:#bbb;font-size:10px;cursor:pointer;transition:.1s}
+.unitBtn:active{transform:scale(0.92);background:rgba(78,204,163,0.15)}
+.unitBtn .icon{font-size:18px;line-height:1.2}
+.unitBtn .cost{color:#f0c040;font-size:9px}
+.unitBtn.disabled{opacity:0.25;pointer-events:none}
+#endTurnBtn{padding:7px 16px;border-radius:8px;background:linear-gradient(135deg,#e94560,#c23152);color:#fff;font-weight:700;font-size:12px;border:none;cursor:pointer}
 
-#gameCanvas{flex:1;display:flex;align-items:center;justify-content:center;overflow:hidden;position:relative;background:#1a1a2e}
-#gameCanvas canvas{display:block;width:100%;height:auto;max-height:100%;touch-action:manipulation}
+#gameCanvas{flex:1;position:relative;overflow:hidden}
+#gameCanvas canvas{display:block;position:absolute;top:0;left:0;width:100%;height:100%;touch-action:manipulation}
 
-#bottomBar{display:flex;justify-content:space-around;align-items:center;padding:8px 6px;background:linear-gradient(135deg,#0f3460,#16213e);border-top:2px solid #533483;flex-shrink:0;flex-wrap:wrap;gap:4px;z-index:10;min-height:56px}
-.unitBtn{display:flex;flex-direction:column;align-items:center;justify-content:center;min-width:60px;padding:4px 8px;border-radius:8px;background:rgba(255,255,255,0.08);border:1px solid rgba(255,255,255,0.15);color:#ccc;font-size:11px;cursor:pointer;transition:.15s}
-.unitBtn:active{transform:scale(0.93);background:rgba(78,204,163,0.2)}
-.unitBtn .icon{font-size:22px}
-.unitBtn .cost{color:#f0c040;font-size:10px}
-.unitBtn.disabled{opacity:0.35;pointer-events:none}
-#endTurnBtn{padding:8px 20px;border-radius:10px;background:linear-gradient(135deg,#e94560,#c23152);color:#fff;font-weight:700;font-size:13px;border:none;cursor:pointer;transition:.15s}
-#endTurnBtn:active{transform:scale(0.93)}
-
-#unitInfo{display:none;position:absolute;bottom:70px;left:50%;transform:translateX(-50%);background:rgba(22,33,62,0.95);border:1px solid #533483;border-radius:12px;padding:10px 16px;font-size:12px;z-index:20;min-width:150px;text-align:center;backdrop-filter:blur(4px)}
-#unitInfo .unitName{font-size:14px;font-weight:700;color:#4ecca3;margin-bottom:4px}
-#unitInfo .stats{display:flex;justify-content:center;gap:12px;color:#aaa;font-size:11px}
-#unitInfo .stats span{display:flex;align-items:center;gap:3px}
+/* Unit Info */
+#unitInfo{display:none;position:absolute;top:6px;left:50%;transform:translateX(-50%);background:rgba(15,12,41,0.92);border:1px solid #533483;border-radius:10px;padding:6px 12px;font-size:11px;z-index:20;text-align:center;backdrop-filter:blur(4px)}
+#unitInfo .uName{font-size:12px;font-weight:700;color:#4ecca3}
+#unitInfo .stats{display:flex;justify-content:center;gap:8px;color:#999;font-size:10px}
 
 /* Modals */
-.modal{display:none;position:absolute;top:0;left:0;right:0;bottom:0;background:rgba(0,0,0,0.7);z-index:60;align-items:center;justify-content:center}
+.modal{display:none;position:absolute;top:0;left:0;right:0;bottom:0;background:rgba(0,0,0,0.6);z-index:50;align-items:center;justify-content:center}
 .modal.show{display:flex}
-.modal-content{background:linear-gradient(135deg,#1a1a2e,#16213e);border:2px solid #533483;border-radius:16px;padding:24px 28px;max-width:340px;width:90%;text-align:center}
-.modal-content h2{color:#4ecca3;margin-bottom:8px;font-size:20px}
-.modal-content p{color:#aaa;font-size:13px;margin-bottom:16px;line-height:1.5}
-.modal-content button{padding:10px 28px;border-radius:10px;border:none;background:linear-gradient(135deg,#4ecca3,#3ab889);color:#1a1a2e;font-weight:700;font-size:15px;cursor:pointer}
+.modal-content{background:linear-gradient(135deg,#1a1a2e,#16213e);border:2px solid #533483;border-radius:14px;padding:20px 24px;max-width:300px;width:88%;text-align:center}
+.modal-content h2{color:#4ecca3;margin-bottom:6px;font-size:18px}
+.modal-content p{color:#aaa;font-size:12px;line-height:1.5;margin-bottom:12px}
+.modal-content button{padding:8px 22px;border-radius:8px;border:none;background:linear-gradient(135deg,#4ecca3,#3ab889);color:#1a1a2e;font-weight:700;font-size:14px;cursor:pointer}
 
-@media(max-height:700px){
-  .menu-btn{padding:12px 0;font-size:14px}
-  #menuScreen .logo-icon{font-size:56px}
-  #menuScreen .logo-title{font-size:30px}
-  #topBar{padding:4px 10px;font-size:12px}
-  #resources{padding:3px 8px;font-size:11px}
-  #bottomBar{padding:4px 4px;min-height:48px}
-  .unitBtn{min-width:48px;padding:2px 6px;font-size:10px;gap:1px}
-  .unitBtn .icon{font-size:18px}
-  #endTurnBtn{padding:6px 14px;font-size:12px}
-}
+/* ===== TUTORIAL ===== */
+#tutorial{display:none;position:absolute;top:0;left:0;right:0;bottom:0;z-index:70;flex-direction:column;align-items:center;justify-content:center;background:rgba(0,0,0,0.75);padding:20px}
+#tutorial.show{display:flex}
+.tut-card{background:linear-gradient(135deg,#1a1a2e,#16213e);border:2px solid #4ecca3;border-radius:14px;padding:18px 20px;max-width:300px;width:100%;text-align:center}
+.tut-card h3{color:#4ecca3;font-size:16px;margin-bottom:8px}
+.tut-card .step{font-size:12px;color:#ccc;line-height:1.6;text-align:left;margin-bottom:10px}
+.tut-card .step span{display:inline-block;width:18px;height:18px;line-height:18px;text-align:center;background:#533483;border-radius:50%;font-size:10px;font-weight:700;color:#fff;margin-right:6px}
+.tut-card button{padding:8px 24px;border-radius:8px;border:none;background:linear-gradient(135deg,#4ecca3,#3ab889);color:#1a1a2e;font-weight:700;font-size:14px;cursor:pointer;margin-top:6px}
+.tut-progress{display:flex;gap:6px;justify-content:center;margin-top:10px}
+.tut-progress .dot{width:6px;height:6px;border-radius:50%;background:rgba(255,255,255,0.2)}
+.tut-progress .dot.active{background:#4ecca3}
 </style>
 </head>
 <body>
 <div id="app">
-  <!-- ===== MENU SCREEN ===== -->
+  <!-- ===== MENU ===== -->
   <div id="menuScreen">
-    <div class="bg-hex"></div>
-    <div class="logo-area">
-      <span class="logo-icon">🏰</span>
-      <div class="logo-title">占城大师</div>
-      <div class="logo-sub">Hex Warriors</div>
-    </div>
+    <div class="logo-icon">🏰</div>
+    <div class="logo-title">占城大师</div>
+    <div class="logo-sub">HEX WARRIORS</div>
     <div class="menu-buttons">
       <button class="menu-btn primary" id="btnNewGame">⚔️ 开始游戏</button>
       <button class="menu-btn secondary" id="btnContinue">💾 继续游戏</button>
       <button class="menu-btn tertiary" id="btnShop">🛒 商城</button>
     </div>
-    <div class="version">v1.0 · 跨模型协作开发</div>
+    <div style="position:absolute;bottom:12px;font-size:9px;color:#444">v1.0 · 跨模型协作开发</div>
   </div>
 
-  <!-- ===== SHOP SCREEN ===== -->
+  <!-- ===== SHOP ===== -->
   <div id="shopScreen">
     <div class="shop-header">
       <button class="shop-back" id="shopBack">←</button>
       <span class="shop-title">🛒 商城</span>
     </div>
     <div class="shop-list">
-      <div class="shop-item">
-        <span class="item-icon">👑</span>
-        <div class="item-info">
-          <div class="item-name">黄金皮肤包</div>
-          <div class="item-desc">所有兵种金色特效皮肤</div>
-        </div>
-        <button class="item-price" onclick="alert('商城功能即将上线！')">¥6</button>
-      </div>
-      <div class="shop-item">
-        <span class="item-icon">🎴</span>
-        <div class="item-info">
-          <div class="item-name">和风战国主题</div>
-          <div class="item-desc">完整地图视觉主题替换</div>
-        </div>
-        <button class="item-price" onclick="alert('商城功能即将上线！')">¥12</button>
-      </div>
-      <div class="shop-item">
-        <span class="item-icon">🗺️</span>
-        <div class="item-info">
-          <div class="item-name">更多地图</div>
-          <div class="item-desc">解锁5张全新对战地图</div>
-        </div>
-        <button class="item-price" onclick="alert('商城功能即将上线！')">¥18</button>
-      </div>
-      <div class="shop-item">
-        <span class="item-icon">⭐</span>
-        <div class="item-info">
-          <div class="item-name">支持开发者</div>
-          <div class="item-desc">给我买杯咖啡 ☕</div>
-        </div>
-        <button class="item-price" onclick="alert('感谢你的支持！❤️')">¥6</button>
-      </div>
+      <div class="shop-item"><span class="item-icon">👑</span><div class="item-info"><div class="item-name">黄金皮肤包</div><div class="item-desc">所有兵种金色特效</div></div><button class="item-price" onclick="alert('即将上线！')">¥6</button></div>
+      <div class="shop-item"><span class="item-icon">🎴</span><div class="item-info"><div class="item-name">和风战国主题</div><div class="item-desc">完整视觉主题替换</div></div><button class="item-price" onclick="alert('即将上线！')">¥12</button></div>
+      <div class="shop-item"><span class="item-icon">🗺️</span><div class="item-info"><div class="item-name">更多地图</div><div class="item-desc">解锁5张新地图</div></div><button class="item-price" onclick="alert('即将上线！')">¥18</button></div>
+      <div class="shop-item"><span class="item-icon">☕</span><div class="item-info"><div class="item-name">支持开发者</div><div class="item-desc">请喝杯咖啡</div></div><button class="item-price" onclick="alert('感谢支持 ❤️')">¥6</button></div>
     </div>
   </div>
 
-  <!-- ===== GAME UI ===== -->
+  <!-- ===== GAME ===== -->
   <div id="gameUI">
     <div id="topBar">
       <button class="back-btn" id="backToMenu">←</button>
       <div class="turnInfo">
-        <span class="playerName">⚔️ 己方</span>
-        <span style="color:#888;margin:0 4px">vs</span>
-        <span class="enemyName">⚔️ 敌方</span>
+        <span class="pName">⚔️ 己方</span>
+        <span style="color:#555;margin:0 3px">vs</span>
+        <span class="eName">⚔️ 敌方</span>
       </div>
-      <div class="phase" id="phaseDisplay">准备中</div>
-    </div>
-    <div id="resources">
-      <div class="res"><span class="icon">💰</span><span class="val" id="goldDisplay">0</span></div>
-      <div class="res"><span class="icon">⛏️</span><span class="val" id="ironDisplay">0</span></div>
-      <div class="res"><span class="icon">🏰</span><span class="val" id="citiesDisplay">0</span></div>
-      <div class="res"><span class="icon">🔴</span><span class="val" id="unitsDisplay">0</span></div>
+      <div class="phase" id="phaseDisplay">准备</div>
     </div>
     <div id="gameCanvas">
       <canvas id="canvas"></canvas>
       <div id="unitInfo">
-        <div class="unitName" id="uInfoName"></div>
+        <div class="uName" id="uInfoName"></div>
         <div class="stats">
-          <span>❤️ <span id="uInfoHp">0</span></span>
-          <span>⚔️ <span id="uInfoAtk">0</span></span>
-          <span>🛡️ <span id="uInfoDef">0</span></span>
-          <span>👟 <span id="uInfoMv">0</span></span>
+          <span>❤️<span id="uInfoHp">0</span></span>
+          <span>⚔️<span id="uInfoAtk">0</span></span>
+          <span>🛡️<span id="uInfoDef">0</span></span>
+          <span>👟<span id="uInfoMv">0</span></span>
         </div>
       </div>
     </div>
     <div id="bottomBar">
-      <div class="unitBtn" data-type="infantry">
-        <span class="icon">🗡️</span><span>步兵</span>
-        <span class="cost">💰1</span>
-      </div>
-      <div class="unitBtn" data-type="archer">
-        <span class="icon">🏹</span><span>弓手</span>
-        <span class="cost">💰2</span>
-      </div>
-      <div class="unitBtn" data-type="cavalry">
-        <span class="icon">🐴</span><span>骑兵</span>
-        <span class="cost">💰3</span>
-      </div>
-      <div class="unitBtn" data-type="shield">
-        <span class="icon">🛡️</span><span>盾卫</span>
-        <span class="cost">💰3</span>
-      </div>
+      <div class="unitBtn" data-type="infantry"><span class="icon">🗡️</span><span>步兵</span><span class="cost">💰1</span></div>
+      <div class="unitBtn" data-type="archer"><span class="icon">🏹</span><span>弓手</span><span class="cost">💰2</span></div>
+      <div class="unitBtn" data-type="cavalry"><span class="icon">🐴</span><span>骑兵</span><span class="cost">💰3</span></div>
+      <div class="unitBtn" data-type="shield"><span class="icon">🛡️</span><span>盾卫</span><span class="cost">💰3</span></div>
       <button id="endTurnBtn">结束回合 ▶</button>
     </div>
   </div>
 
-  <!-- ===== MODALS ===== -->
+  <!-- ===== TUTORIAL ===== -->
+  <div id="tutorial">
+    <div class="tut-card">
+      <h3>🎯 新手教程</h3>
+      <div class="step" id="tutText"><span>1</span><b>点击己方部队</b>（绿色圆圈）选中它</div>
+      <div class="step" id="tutText2" style="font-size:11px;color:#888;text-align:center;margin-bottom:6px">高亮区域可移动/攻击</div>
+      <button id="tutNext">下一步 →</button>
+      <div class="tut-progress" id="tutProgress"></div>
+    </div>
+  </div>
+
+  <!-- ===== WIN MODAL ===== -->
   <div class="modal" id="winModal">
     <div class="modal-content">
       <h2 id="winTitle">🏆 胜利！</h2>
-      <p id="winText">你占领了4座城池，统治了大陆！</p>
+      <p id="winText">你占领了4座城池！</p>
       <button onclick="game.backToMenu()">返回主菜单</button>
     </div>
   </div>
 </div>
 
 <script>
-// ===== MENU LOGIC =====
-const menuScreen = document.getElementById('menuScreen');
-const gameUI = document.getElementById('gameUI');
-const shopScreen = document.getElementById('shopScreen');
+// ===== MENU =====
+const menuScreen=document.getElementById('menuScreen');
+const gameUI=document.getElementById('gameUI');
+const shopScreen=document.getElementById('shopScreen');
+const tutorial=document.getElementById('tutorial');
 
-document.getElementById('btnNewGame').addEventListener('click', () => startNewGame());
-document.getElementById('btnContinue').addEventListener('click', () => {
-  const saved = localStorage.getItem('hexWarriorsSave');
-  if (!saved) { alert('没有找到存档记录'); return; }
-  startNewGame(true);
+document.getElementById('btnNewGame').addEventListener('click',()=>startGame(false));
+document.getElementById('btnContinue').addEventListener('click',()=>{
+  if(!localStorage.getItem('hexWarriorsSave')){alert('没有存档');return}
+  startGame(true);
 });
-document.getElementById('btnShop').addEventListener('click', () => {
-  shopScreen.classList.add('show');
-});
-document.getElementById('shopBack').addEventListener('click', () => {
-  shopScreen.classList.remove('show');
-});
-document.getElementById('backToMenu').addEventListener('click', () => {
-  if (confirm('确定要返回主菜单吗？当前进度会丢失。')) game.backToMenu();
+document.getElementById('btnShop').addEventListener('click',()=>shopScreen.classList.add('show'));
+document.getElementById('shopBack').addEventListener('click',()=>shopScreen.classList.remove('show'));
+document.getElementById('backToMenu').addEventListener('click',()=>{
+  if(confirm('返回菜单？进度会丢失。'))game.backToMenu();
 });
 
-function startNewGame(loadSave) {
+function startGame(load){
   menuScreen.classList.add('hidden');
   gameUI.classList.add('show');
   shopScreen.classList.remove('show');
-  if (game) {
-    if (loadSave) game.loadFromSave();
+  tutorial.classList.add('show');
+  if(game){
+    if(load)game.loadFromSave();
     else game.reset();
   }
 }
 
-// ===== GAME DATA =====
-const UNIT_TYPES = {
-  infantry:{name:'步兵',icon:'🗡️',atk:2,hp:3,def:1,mv:1,cost:1,siege:1},
+// ===== TUTORIAL =====
+const tutSteps=[
+  {t:'点击己方部队',d:'绿色圆圈的部队是你方的，点击选中',s:'<span>1</span><b>点击己方部队</b>（绿色圆圈）选中它'},
+  {t:'查看行动范围',d:'选中后高亮区域表示可移动/攻击的位置',s:'<span>2</span>高亮 <span style="color:#4ecca3">绿色</span>=可移动 · <span style="color:#e94560">红色</span>=可攻击'},
+  {t:'移动与攻击',d:'点击高亮区域移动，点击红色区域攻击敌方',s:'<span>3</span><b>点击高亮格子</b>移动 · <b>点击红色格子</b>攻击'},
+  {t:'招募兵种',d:'点击己方城池，底部出现兵种按钮即可招募',s:'<span>4</span><b>点击己方城池</b>→ 点底部兵种招募'},
+  {t:'结束回合',d:'操作完成后点击"结束回合"，轮到AI行动',s:'<span>5</span>点 <b style="color:#e94560">结束回合</b> → AI行动 → 你再次操作'}
+];
+let tutStep=0;
+function showTutStep(){
+  const st=tutSteps[tutStep];
+  document.getElementById('tutText').innerHTML=st.s;
+  document.getElementById('tutText2').textContent=st.d;
+  const pbar=document.getElementById('tutProgress');
+  pbar.innerHTML='';
+  tutSteps.forEach((_,i)=>{
+    const d=document.createElement('span');
+    d.className='dot'+(i===tutStep?' active':'');
+    pbar.appendChild(d);
+  });
+  document.getElementById('tutNext').textContent=tutStep<tutSteps.length-1?'下一步 →':'开始玩！';
+}
+document.getElementById('tutNext').addEventListener('click',()=>{
+  if(tutStep<tutSteps.length-1){tutStep++;showTutStep();}
+  else{tutorial.classList.remove('show');tutStep=0;}
+});
+showTutStep();
+
+// ===== GAME =====
+const UNIT_TYPES={
+  infantry:{name:'步兵',icon:'🗡️',atk:2,hp:3,def:1,mv:1,cost:1},
   archer:{name:'弓手',icon:'🏹',atk:3,hp:2,def:0,mv:1,cost:2,ranged:true},
   cavalry:{name:'骑兵',icon:'🐴',atk:4,hp:2,def:1,mv:2,cost:3},
-  shield:{name:'盾卫',icon:'🛡️',atk:1,hp:5,def:2,mv:1,cost:3,garrison:2}
+  shield:{name:'盾卫',icon:'🛡️',atk:1,hp:5,def:2,mv:1,cost:3}
 };
-const CYCLE_ORDER = ['infantry','archer','cavalry','shield'];
+const COLS=7,ROWS=7;
 
-function getBonus(atkType, defType){
-  const cycle = { infantry:'shield', shield:'cavalry', cavalry:'archer', archer:'infantry' };
-  return cycle[atkType] === defType ? 1 : 0;
-}
-
-// ===== MAP =====
-const COLS=7, ROWS=7;
-const HEX_R=36;
-const W=Math.ceil(HEX_R*Math.sqrt(3));
-const H=HEX_R*1.5;
-
-function hexCenter(col,row){
-  const x = col * W + (row%2===1 ? W/2 : 0);
-  const y = row * H * 0.75;
-  return {x:x + 60, y:y + 40};
-}
-function hexPoints(cx,cy,r){
-  const pts=[];
-  for(let i=0;i<6;i++){
-    const a=Math.PI/6 + i*Math.PI/3;
-    pts.push({x:cx+r*Math.cos(a),y:cy+r*Math.sin(a)});
-  }
-  return pts;
-}
 function hexDist(c1,r1,c2,r2){
-  const x1 = c1 - Math.floor(r1/2);
-  const z1 = r1;
-  const y1 = -x1 - z1;
-  const x2 = c2 - Math.floor(r2/2);
-  const z2 = r2;
-  const y2 = -x2 - z2;
-  return Math.max(Math.abs(x1-x2), Math.abs(y1-y2), Math.abs(z1-z2));
+  const x1=c1-Math.floor(r1/2),z1=r1,y1=-x1-z1;
+  const x2=c2-Math.floor(r2/2),z2=r2,y2=-x2-z2;
+  return Math.max(Math.abs(x1-x2),Math.abs(y1-y2),Math.abs(z1-z2));
+}
+function getBonus(atk,def){
+  const cycle={infantry:'shield',shield:'cavalry',cavalry:'archer',archer:'infantry'};
+  return cycle[atk]===def?1:0;
 }
 
-// ===== GAME CLASS =====
 class Game{
   constructor(){
     this.canvas=document.getElementById('canvas');
     this.ctx=this.canvas.getContext('2d');
+    this.HEX_R=32; // dynamic - recalculated on resize
     this.isRunning=false;
     this.reset();
     this.bindEvents();
-    this.render();
+    this.rafId=null;
+    this.renderLoop();
   }
 
-  backToMenu(){
-    this.isRunning=false;
-    if(this.loop) clearInterval(this.loop);
-    gameUI.classList.remove('show');
-    menuScreen.classList.remove('hidden');
-    document.getElementById('winModal').classList.remove('show');
+  // ===== FIXED SCALING =====
+  getCSSSize(){
+    const rect=this.canvas.getBoundingClientRect();
+    return {w:rect.width,h:rect.height};
+  }
+  calcLayout(){
+    const {w,h}=this.getCSSSize();
+    // Fit the 7x7 grid in the smaller dimension with padding
+    const pad=Math.min(w,h)*0.08;
+    const availW=w-pad*2;
+    const availH=h-pad*2;
+    // 7 hex columns: each column takes ~sqrt(3)*R width
+    // 7 hex rows: each row takes 1.5*R height (with overlap)
+    const rFromW=availW/(7*Math.sqrt(3));
+    const rFromH=availH/(7*1.5*0.75+0.5); // rows overlap
+    this.HEX_R=Math.max(12,Math.floor(Math.min(rFromW,rFromH)));
+    // Recalc grid dimensions
+    const W=Math.ceil(this.HEX_R*Math.sqrt(3));
+    const H=this.HEX_R*1.5;
+    // Grid bounds
+    let minX=Infinity,maxX=-Infinity,minY=Infinity,maxY=-Infinity;
+    for(let r=0;r<ROWS;r++){
+      for(let c=0;c<COLS;c++){
+        const cx=c*W+(r%2===1?W/2:0);
+        const cy=r*H*0.75;
+        minX=Math.min(minX,cx-this.HEX_R); maxX=Math.max(maxX,cx+this.HEX_R);
+        minY=Math.min(minY,cy-this.HEX_R); maxY=Math.max(maxY,cy+this.HEX_R);
+      }
+    }
+    // Center offset
+    this.gridOx=(w-(maxX+minX))/2-minX;
+    this.gridOy=(h-(maxY+minY))/2-minY;
+    this._W=W; this._H=H;
+  }
+  hexCenter(c,r){
+    return {
+      x:c*this._W+(r%2===1?this._W/2:0)+this.gridOx,
+      y:r*this._H*0.75+this.gridOy
+    };
+  }
+  hexPoints(cx,cy){
+    const pts=[];
+    for(let i=0;i<6;i++){
+      const a=Math.PI/6+i*Math.PI/3;
+      pts.push({x:cx+this.HEX_R*Math.cos(a),y:cy+this.HEX_R*Math.sin(a)});
+    }
+    return pts;
+  }
+  pxToHex(px,py){
+    let best={c:-1,r:-1,d:Infinity};
+    for(let r=0;r<ROWS;r++){
+      for(let c=0;c<COLS;c++){
+        const hc=this.hexCenter(c,r);
+        const d=Math.hypot(px-hc.x,py-hc.y);
+        if(d<best.d) best={c,r,d};
+      }
+    }
+    return best.d<this.HEX_R*0.85?{c:best.c,r:best.r}:null;
   }
 
+  // ===== GAME STATE =====
   reset(){
     this.turn=1;
     this.phase='play';
@@ -318,84 +327,59 @@ class Game{
     this.unitIdCounter=0;
     this.isRunning=true;
 
-    // Map
     this.grid=[];
     for(let r=0;r<ROWS;r++){
       this.grid[r]=[];
       for(let c=0;c<COLS;c++){
         let type='plain';
-        if((c===1&&r===3)||(c===5&&r===3)||(c===2&&r===1)||(c===4&&r===5)) type='forest';
-        else if((c===0||c===6)&&r===3) type='mountain';
+        if((c===1&&r===3)||(c===5&&r===3)||(c===2&&r===1)||(c===4&&r===5))type='forest';
+        else if((c===0||c===6)&&r===3)type='mountain';
         this.grid[r][c]={type,owner:-1,city:null,village:false,level:1};
       }
     }
-    // Castles
-    this.castles=[
-      {c:1,r:1},{c:5,r:1},{c:0,r:3},{c:6,r:3},{c:1,r:5},{c:5,r:5}
-    ];
+    this.castles=[{c:1,r:1},{c:5,r:1},{c:0,r:3},{c:6,r:3},{c:1,r:5},{c:5,r:5}];
     this.castles.forEach((p,i)=>{
       const t=this.grid[p.r][p.c];
-      t.city=i<3?0:1;
-      t.owner=i<3?0:1;
-      t.level=1;
+      t.city=i<3?0:1;t.owner=i<3?0:1;t.level=1;
     });
-    // Villages
-    const vpos=[{c:3,r:0},{c:2,r:2},{c:4,r:2},{c:3,r:3},{c:2,r:4},{c:4,r:4},{c:3,r:6}];
-    vpos.forEach(p=>{ this.grid[p.r][p.c].village=true; });
+    [{c:3,r:0},{c:2,r:2},{c:4,r:2},{c:3,r:3},{c:2,r:4},{c:4,r:4},{c:3,r:6}]
+      .forEach(p=>{this.grid[p.r][p.c].village=true;});
 
-    this.players=[
-      {gold:8,iron:2,cities:3,cityLevels:{}},
-      {gold:8,iron:2,cities:3,cityLevels:{}}
-    ];
+    this.players=[{gold:8,iron:2,cities:3},{gold:8,iron:2,cities:3}];
     this.units=[];
     this.castles.forEach((p,i)=>{
-      const owner=i<3?0:1;
-      if(i===0||i===3) this.createUnit(p.c+1>6?p.c-1:p.c+1,p.r,'infantry',owner);
+      if(i===0||i===3)this.createUnit(p.c+1>6?p.c-1:p.c+1,p.r,'infantry',i<3?0:1);
     });
-
-    this.resize();
     this.updateUI();
-    if(this.loop) clearInterval(this.loop);
-    this.loop=setInterval(()=>this.render(),50);
     document.getElementById('winModal').classList.remove('show');
     document.getElementById('phaseDisplay').textContent='你的回合';
   }
 
   loadFromSave(){
-    try {
-      const raw = localStorage.getItem('hexWarriorsSave');
-      if(!raw) { this.reset(); return; }
-      const data = JSON.parse(raw);
-      this.turn=data.turn;
-      this.phase='play';
-      this.currentPlayer=0;
-      this.selectedUnit=null;
-      this.selectedTile=null;
-      this.highlightedTiles=[];
-      this.unitIdCounter=data.unitIdCounter;
-      this.grid=data.grid;
-      this.castles=data.castles;
-      this.players=data.players;
-      this.units=data.units;
-      this.isRunning=true;
-      this.resize();
+    try{
+      const d=JSON.parse(localStorage.getItem('hexWarriorsSave'));
+      if(!d)return this.reset();
+      Object.assign(this,d);
+      this.isRunning=true;this.phase='play';this.currentPlayer=0;
+      this.selectedUnit=null;this.selectedTile=null;this.highlightedTiles=[];
       this.updateUI();
-      if(this.loop) clearInterval(this.loop);
-      this.loop=setInterval(()=>this.render(),50);
       document.getElementById('winModal').classList.remove('show');
       document.getElementById('phaseDisplay').textContent='你的回合';
-    } catch(e) { this.reset(); }
+    }catch(e){this.reset();}
   }
 
-  saveGame(){
-    try {
-      const data={
-        turn:this.turn,unitIdCounter:this.unitIdCounter,
-        grid:this.grid,castles:this.castles,
-        players:this.players,units:this.units
-      };
-      localStorage.setItem('hexWarriorsSave',JSON.stringify(data));
-    }catch(e){}
+  save(){try{localStorage.setItem('hexWarriorsSave',JSON.stringify({
+    turn:this.turn,unitIdCounter:this.unitIdCounter,
+    grid:this.grid,castles:this.castles,
+    players:this.players,units:this.units
+  }))}catch(e){}}
+
+  backToMenu(){
+    this.isRunning=false;
+    if(this.rafId)cancelAnimationFrame(this.rafId);
+    gameUI.classList.remove('show');
+    menuScreen.classList.remove('hidden');
+    document.getElementById('winModal').classList.remove('show');
   }
 
   createUnit(c,r,type,owner){
@@ -408,46 +392,23 @@ class Game{
     return u;
   }
 
-  scale(){
-    const w=this.canvas.width;
-    return w/480;
-  }
-
-  pxToHex(px,py){
-    const s=this.scale();
-    const ox=(this.canvas.width-480*s)/2;
-    const oy=(this.canvas.height-600*s)/2;
-    const lx=(px-ox)/s, ly=(py-oy)/s;
-    let best={c:-1,r:-1,d:999};
-    for(let r=0;r<ROWS;r++){
-      for(let c=0;c<COLS;c++){
-        const hc=hexCenter(c,r);
-        const d=Math.sqrt((lx-hc.x)**2+(ly-hc.y)**2);
-        if(d<best.d){best={c,r,d};}
-      }
-    }
-    return best.d<HEX_R*0.9?{c:best.c,r:best.r}:null;
-  }
-
+  // ===== ACTIONS =====
   selectUnit(u){
-    if(this.selectedUnit===u){this.deselect();return;}
-    this.selectedUnit=u;
-    this.selectedTile=null;
+    if(this.selectedUnit===u)return this.deselect();
+    this.selectedUnit=u;this.selectedTile=null;
     this.highlightedTiles=[];
     for(let r=0;r<ROWS;r++){
       for(let c=0;c<COLS;c++){
-        if(u.moved) continue;
+        if(u.moved)continue;
         const d=hexDist(u.c,u.r,c,r);
-        if(d>0 && d<=u.mv){
-          const occ=this.units.find(ux=>ux.c===c&&ux.r===r&&ux.owner!==u.owner);
-          if(occ && d<=1){
-            this.highlightedTiles.push({c,r,action:'attack',unit:occ});
-          }else if(!this.units.find(ux=>ux.c===c&&ux.r===r)){
+        if(d>0&&d<=u.mv){
+          const occ=this.units.find(x=>x.c===c&&x.r===r&&x.owner!==u.owner);
+          if(occ&&d<=1)this.highlightedTiles.push({c,r,action:'attack',unit:occ});
+          else if(!this.units.find(x=>x.c===c&&x.r===r))
             this.highlightedTiles.push({c,r,action:'move'});
-          }
-        }else if(d===1 && !u.attacked){
-          const occ=this.units.find(ux=>ux.c===c&&ux.r===r&&ux.owner!==u.owner);
-          if(occ) this.highlightedTiles.push({c,r,action:'attack',unit:occ});
+        }else if(d===1&&!u.attacked){
+          const occ=this.units.find(x=>x.c===c&&x.r===r&&x.owner!==u.owner);
+          if(occ)this.highlightedTiles.push({c,r,action:'attack',unit:occ});
         }
       }
     }
@@ -455,97 +416,122 @@ class Game{
   }
 
   deselect(){
-    this.selectedUnit=null;
-    this.selectedTile=null;
+    this.selectedUnit=null;this.selectedTile=null;
     this.highlightedTiles=[];
     document.getElementById('unitInfo').style.display='none';
   }
 
   showUnitInfo(u){
-    const info=document.getElementById('unitInfo');
+    const i=document.getElementById('unitInfo');
     document.getElementById('uInfoName').textContent=UNIT_TYPES[u.type].icon+' '+UNIT_TYPES[u.type].name;
-    document.getElementById('uInfoHp').textContent=u.hp;
+    document.getElementById('uInfoHp').textContent=u.hp+'/'+u.maxHp;
     document.getElementById('uInfoAtk').textContent=u.atk;
     document.getElementById('uInfoDef').textContent=u.def;
     document.getElementById('uInfoMv').textContent=u.moved?0:u.mv;
-    info.style.display='block';
+    i.style.display='block';
   }
 
   moveUnit(u,c,r){
-    u.c=c; u.r=r; u.moved=true;
+    u.c=c;u.r=r;u.moved=true;
     const t=this.grid[r][c];
-    if(t.village && t.owner!==u.owner){
-      t.owner=u.owner;
-      this.players[u.owner].iron+=1;
-    }
-    if(t.city!==null && t.owner!==u.owner){
-      t.owner=u.owner;
-      this.players[u.owner].cities+=1;
-      this.players[1-u.owner].cities-=1;
+    if(t.village&&t.owner!==u.owner){t.owner=u.owner;this.players[u.owner].iron++;}
+    if(t.city!==null&&t.owner!==u.owner){
+      t.owner=u.owner;this.players[u.owner].cities++;this.players[1-u.owner].cities--;
       u.hp=Math.min(u.hp+2,u.maxHp);
     }
-    this.deselect();
-    this.updateUI();
-    this.saveGame();
-    this.checkWin();
+    this.deselect();this.updateUI();this.save();this.checkWin();
   }
 
   attackUnit(u,target){
     const bonus=getBonus(u.type,target.type);
     let dmg=u.atk+bonus;
-    let defBonus=target.def;
-    const tTerrain=this.grid[target.r][target.c];
-    if(tTerrain.type==='forest') defBonus+=1;
-    if(tTerrain.city!==null && target.owner===tTerrain.owner) defBonus+=2;
-    dmg=Math.max(1,dmg-defBonus);
-    target.hp-=dmg;
-    u.attacked=true;
-    u.moved=true;
-    // Counter-attack
-    if(hexDist(u.c,u.r,target.c,target.r)<=1 && target.hp>0){
-      const cBonus=getBonus(target.type,u.type);
-      let cdmg=target.atk+cBonus;
-      let uDef=u.def;
-      const uTerrain=this.grid[u.r][u.c];
-      if(uTerrain.type==='forest') uDef+=1;
-      cdmg=Math.max(1,cdmg-uDef);
-      u.hp-=cdmg;
+    let df=target.def;
+    const tt=this.grid[target.r][target.c];
+    if(tt.type==='forest')df++;
+    if(tt.city!==null&&target.owner===tt.owner)df+=2;
+    dmg=Math.max(1,dmg-df);target.hp-=dmg;
+    u.attacked=true;u.moved=true;
+    if(hexDist(u.c,u.r,target.c,target.r)<=1&&target.hp>0){
+      let cdmg=target.atk+getBonus(target.type,u.type);
+      const ut=this.grid[u.r][u.c];
+      let ud=u.def;if(ut.type==='forest')ud++;
+      cdmg=Math.max(1,cdmg-ud);u.hp-=cdmg;
     }
-    if(target.hp<=0) this.units=this.units.filter(ux=>ux!==target);
-    if(u.hp<=0){this.units=this.units.filter(ux=>ux!==u);this.deselect();}
-    this.updateUI();
-    this.saveGame();
-    this.checkWin();
+    if(target.hp<=0)this.units=this.units.filter(x=>x!==target);
+    if(u.hp<=0){this.units=this.units.filter(x=>x!==u);this.deselect();}
+    this.updateUI();this.save();this.checkWin();
   }
 
   spawnUnit(c,r,type){
-    const p=this.currentPlayer;
-    const ut=UNIT_TYPES[type];
-    if(this.players[p].gold<ut.cost) return;
-    if(this.units.find(u=>u.c===c&&u.r===r)) return;
-    this.players[p].gold-=ut.cost;
-    this.createUnit(c,r,type,p);
-    this.updateUI();
-    this.saveGame();
+    if(this.players[0].gold<UNIT_TYPES[type].cost)return;
+    if(this.units.find(x=>x.c===c&&x.r===r))return;
+    this.players[0].gold-=UNIT_TYPES[type].cost;
+    this.createUnit(c,r,type,0);
+    this.updateUI();this.save();
   }
 
   endTurn(){
-    if(this.currentPlayer!==0) return;
+    if(this.currentPlayer!==0||this.phase!=='play')return;
     this.phase='ai';
     this.units.forEach(u=>{u.moved=false;u.attacked=false;u.mv=u.maxMv;});
-    this.currentPlayer=1;
-    this.saveGame();
-    this.aiTurn();
+    this.currentPlayer=1;this.save();
+    document.getElementById('phaseDisplay').textContent='敌方思考中...';
+    this.giveResources(1);this.aiRecruit();
+    setTimeout(()=>this.aiAct(),300);
   }
 
-  giveResources(pIdx){
-    const p=this.players[pIdx];
-    p.gold+=p.cities*2;
+  giveResources(p){
+    this.players[p].gold+=this.players[p].cities*2;
     let v=0;
-    for(let r=0;r<ROWS;r++)
-      for(let c=0;c<COLS;c++)
-        if(this.grid[r][c].village&&this.grid[r][c].owner===pIdx) v++;
-    p.iron+=v;
+    for(let r=0;r<ROWS;r++)for(let c=0;c<COLS;c++)
+      if(this.grid[r][c].village&&this.grid[r][c].owner===p)v++;
+    this.players[p].iron+=v;
+  }
+
+  aiRecruit(){
+    this.castles.filter((_,i)=>i>=3).forEach(c=>{
+      if(this.players[1].gold<=0)return;
+      if(this.units.find(x=>x.c===c.c&&x.r===c.r))return;
+      const bt=['infantry','archer','cavalry','shield'][Math.floor(Math.random()*4)];
+      if(this.players[1].gold>=UNIT_TYPES[bt].cost){
+        this.players[1].gold-=UNIT_TYPES[bt].cost;
+        this.createUnit(c.c,c.r,bt,1);
+      }
+    });this.save();
+  }
+
+  aiAct(){
+    const ai=this.units.filter(u=>u.owner===1);
+    const pc=this.castles.filter((_,i)=>i<3);
+    ai.forEach(u=>{
+      if(u.moved||u.hp<=0)return;
+      let targets=this.units.filter(x=>x.owner===0);
+      let closest=null,cd=99;
+      if(targets.length===0)pc.forEach(p=>{const d=hexDist(u.c,u.r,p.c,p.r);if(d<cd){cd=d;closest=p;}});
+      else targets.forEach(t=>{const d=hexDist(u.c,u.r,t.c,t.r);if(d<cd){cd=d;closest={c:t.c,r:t.r};}});
+      if(!closest)return;
+      if(cd>1&&u.mv>0){
+        let bm=null,bd=cd;
+        for(let r=0;r<ROWS;r++)for(let c=0;c<COLS;c++){
+          if(hexDist(u.c,u.r,c,r)===1&&!this.units.find(x=>x.c===c&&x.r===r)){
+            const nd=hexDist(c,r,closest.c,closest.r);
+            if(nd<bd){bd=nd;bm={c,r};}
+          }
+        }
+        if(bm&&!this.units.find(x=>x.c===bm.c&&x.r===bm.r&&x.owner===0))this.moveUnit(u,bm.c,bm.r);
+      }
+      const ae=this.units.find(x=>x.owner===0&&hexDist(u.c,u.r,x.c,x.r)<=1);
+      if(ae&&!u.attacked)this.attackUnit(u,ae);
+    });
+    setTimeout(()=>{
+      this.units=this.units.filter(u=>u.hp>0);
+      this.currentPlayer=0;this.turn++;
+      this.giveResources(0);
+      this.units.forEach(u=>{u.moved=false;u.attacked=false;u.mv=u.maxMv;});
+      this.phase='play';
+      document.getElementById('phaseDisplay').textContent='你的回合';
+      this.updateUI();this.render();this.save();
+    },300);
   }
 
   checkWin(){
@@ -559,263 +545,180 @@ class Game{
     }else if(this.players[1].cities>=4){
       this.phase='gameover';
       document.getElementById('winTitle').textContent='💀 失败';
-      document.getElementById('winText').textContent='敌方占领了4座城池，你失败了...';
+      document.getElementById('winText').textContent='敌方占领了4座城池...';
       document.getElementById('winModal').classList.add('show');
       document.getElementById('phaseDisplay').textContent='失败';
       localStorage.removeItem('hexWarriorsSave');
     }
   }
 
-  // ===== AI =====
-  aiTurn(){
-    document.getElementById('phaseDisplay').textContent='敌方思考中...';
-    this.giveResources(1);
-    this.aiRecruit();
-    setTimeout(()=>{ this.aiAct(); },400);
-  }
-
-  aiRecruit(){
-    const aiCastles=this.castles.filter((_,i)=>i>=3);
-    aiCastles.forEach(castle=>{
-      if(this.players[1].gold<=0) return;
-      if(this.units.find(u=>u.c===castle.c&&u.r===castle.r)) return;
-      const types=['infantry','archer','cavalry','shield'];
-      const bt=types[Math.floor(Math.random()*types.length)];
-      const ut=UNIT_TYPES[bt];
-      if(this.players[1].gold>=ut.cost){
-        this.players[1].gold-=ut.cost;
-        this.createUnit(castle.c,castle.r,bt,1);
-      }
-    });
-    this.saveGame();
-  }
-
-  aiAct(){
-    const aiUnits=this.units.filter(u=>u.owner===1);
-    const playerCastles=this.castles.filter((_,i)=>i<3);
-    aiUnits.forEach(u=>{
-      if(u.moved||u.hp<=0) return;
-      let targets=this.units.filter(ux=>ux.owner===0);
-      let closest=null, cd=99;
-      if(targets.length===0){
-        playerCastles.forEach(pc=>{
-          const d=hexDist(u.c,u.r,pc.c,pc.r);
-          if(d<cd){cd=d;closest={c:pc.c,r:pc.r};}
-        });
-      }else{
-        targets.forEach(t=>{
-          const d=hexDist(u.c,u.r,t.c,t.r);
-          if(d<cd){cd=d;closest={c:t.c,r:t.r};}
-        });
-      }
-      if(!closest) return;
-      if(cd>1 && u.mv>0){
-        let bestMove=null,bestD=cd;
-        for(let r=0;r<ROWS;r++){
-          for(let c=0;c<COLS;c++){
-            const d=hexDist(u.c,u.r,c,r);
-            if(d===1 && !this.units.find(ux=>ux.c===c&&ux.r===r)){
-              const nd=hexDist(c,r,closest.c,closest.r);
-              if(nd<bestD){bestD=nd;bestMove={c,r};}
-            }
-          }
-        }
-        if(bestMove){
-          const enemy=this.units.find(ux=>ux.c===bestMove.c&&ux.r===bestMove.r&&ux.owner===0);
-          if(!enemy) this.moveUnit(u,bestMove.c,bestMove.r);
-        }
-      }
-      const adjEnemy=this.units.find(ux=>ux.owner===0&&hexDist(u.c,u.r,ux.c,ux.r)<=1);
-      if(adjEnemy && !u.attacked) this.attackUnit(u,adjEnemy);
-    });
-    setTimeout(()=>{
-      this.units=this.units.filter(u=>u.hp>0);
-      this.currentPlayer=0;
-      this.turn++;
-      this.giveResources(0);
-      this.units.forEach(u=>{u.moved=false;u.attacked=false;u.mv=u.maxMv;});
-      this.phase='play';
-      document.getElementById('phaseDisplay').textContent='你的回合';
-      this.updateUI();
-      this.render();
-      this.saveGame();
-    },300);
-  }
-
   // ===== UI =====
   updateUI(){
     const p=this.players[0];
-    document.getElementById('goldDisplay').textContent=p.gold;
-    document.getElementById('ironDisplay').textContent=p.iron;
-    document.getElementById('citiesDisplay').textContent=p.cities;
+    document.getElementById('goldDisplay').textContent=p.gold || '?';
+    document.getElementById('ironDisplay').textContent=p.iron || '?';
+    document.getElementById('citiesDisplay').textContent=p.cities || '?';
     document.getElementById('unitsDisplay').textContent=this.units.filter(u=>u.owner===0).length;
-    document.querySelectorAll('.unitBtn').forEach(btn=>{
-      const type=btn.dataset.type;
-      const cost=UNIT_TYPES[type].cost;
-      btn.classList.toggle('disabled',!this.isRunning||this.phase!=='play'||this.currentPlayer!==0||p.gold<cost);
+    document.querySelectorAll('.unitBtn').forEach(b=>{
+      const c=UNIT_TYPES[b.dataset.type].cost;
+      b.classList.toggle('disabled',!!(!this.isRunning||this.phase!=='play'||this.currentPlayer!==0||p.gold<c));
     });
   }
 
   // ===== RENDER =====
-  resize(){
-    const container=document.getElementById('gameCanvas');
-    const rect=container.getBoundingClientRect();
-    const dpr=window.devicePixelRatio||1;
-    const w=Math.min(480,rect.width);
-    const h=Math.min(600,rect.height);
-    this.canvas.width=w*dpr;
-    this.canvas.height=h*dpr;
-    this.canvas.style.width=w+'px';
-    this.canvas.style.height=h+'px';
-    this.ctx.setTransform(dpr,0,0,dpr,0,0);
-    this.canvas._w=w;
-    this.canvas._h=h;
-  }
-
   render(){
-    if(!this.isRunning) return;
     const ctx=this.ctx;
-    const w=this.canvas._w||480;
-    const h=this.canvas._h||600;
+    const {w,h}=this.getCSSSize();
     ctx.clearRect(0,0,w,h);
 
-    const grad=ctx.createLinearGradient(0,0,0,h);
-    grad.addColorStop(0,'#1a1a2e');
-    grad.addColorStop(1,'#0f3460');
-    ctx.fillStyle=grad;
-    ctx.fillRect(0,0,w,h);
+    // Background
+    const g=ctx.createLinearGradient(0,0,0,h);
+    g.addColorStop(0,'#1a1a2e');g.addColorStop(1,'#0f3460');
+    ctx.fillStyle=g;ctx.fillRect(0,0,w,h);
 
-    const s=this.scale();
-    ctx.save();
-    const ox=(w-480*s)/2, oy=(h-600*s)/2;
-    ctx.translate(ox,oy);
-    ctx.scale(s,s);
-
+    // Hex grid
     for(let r=0;r<ROWS;r++){
       for(let c=0;c<COLS;c++){
-        const hc=hexCenter(c,r);
-        const pts=hexPoints(hc.x,hc.y,HEX_R);
+        const hc=this.hexCenter(c,r);
+        const pts=this.hexPoints(hc.x,hc.y);
         const tile=this.grid[r][c];
-        let fill='#3a5a3e';
-        if(tile.type==='forest') fill='#1a3a2a';
-        else if(tile.type==='mountain') fill='#4a3a2a';
-        if(tile.city!==null) fill=tile.owner===0?'#2a4a7a':tile.owner===1?'#7a2a2a':'#4a4a4a';
-        else if(tile.village) fill=tile.owner===0?'#2a5a3a':tile.owner===1?'#5a2a2a':'#5a4a2a';
 
-        const hl=this.highlightedTiles.find(h=>h.c===c&&h.r===r);
-        if(hl) fill=hl.action==='attack'?'rgba(233,69,96,0.5)':'rgba(78,204,163,0.4)';
-        if(this.selectedUnit&&this.selectedUnit.c===c&&this.selectedUnit.r===r) fill='rgba(78,204,163,0.3)';
+        let fill='#3a5a3e';
+        if(tile.type==='forest')fill='#1a3a2a';
+        else if(tile.type==='mountain')fill='#4a3a2a';
+        if(tile.city!==null)fill=tile.owner===0?'#2a4a7a':tile.owner===1?'#7a2a2a':'#4a4a4a';
+        else if(tile.village)fill=tile.owner===0?'#2a5a3a':tile.owner===1?'#5a2a2a':'#5a4a2a';
+
+        const hl=this.highlightedTiles.find(x=>x.c===c&&x.r===r);
+        if(hl)fill=hl.action==='attack'?'rgba(233,69,96,0.5)':'rgba(78,204,163,0.4)';
+        if(this.selectedUnit&&this.selectedUnit.c===c&&this.selectedUnit.r===r)fill='rgba(78,204,163,0.3)';
 
         ctx.beginPath();
         ctx.moveTo(pts[0].x,pts[0].y);
-        for(let i=1;i<6;i++) ctx.lineTo(pts[i].x,pts[i].y);
+        for(let i=1;i<6;i++)ctx.lineTo(pts[i].x,pts[i].y);
         ctx.closePath();
-        ctx.fillStyle=fill;
-        ctx.fill();
-        ctx.strokeStyle='rgba(255,255,255,0.12)';
-        ctx.lineWidth=1.5;
-        ctx.stroke();
+        ctx.fillStyle=fill;ctx.fill();
+        ctx.strokeStyle='rgba(255,255,255,0.10)';
+        ctx.lineWidth=1;ctx.stroke();
 
         if(tile.city!==null){
-          const color=tile.owner===0?'#4ecca3':tile.owner===1?'#e94560':'#888';
-          ctx.fillStyle=color;
-          ctx.font='20px sans-serif';
-          ctx.textAlign='center';
-          ctx.textBaseline='middle';
+          ctx.font=`${this.HEX_R*0.6}px sans-serif`;
+          ctx.textAlign='center';ctx.textBaseline='middle';
           ctx.fillText('🏰',hc.x,hc.y-2);
-          if(tile.level>1){
-            ctx.fillStyle='#f0c040';
-            ctx.font='9px sans-serif';
-            ctx.fillText('Lv'+tile.level,hc.x,hc.y+16);
-          }
         }else if(tile.village){
-          ctx.font='14px sans-serif';
-          ctx.textAlign='center';
-          ctx.textBaseline='middle';
+          ctx.font=`${this.HEX_R*0.4}px sans-serif`;
+          ctx.textAlign='center';ctx.textBaseline='middle';
           ctx.fillText('🏘️',hc.x,hc.y);
         }
       }
     }
 
+    // Units
     this.units.forEach(u=>{
-      if(u.hp<=0) return;
-      const hc=hexCenter(u.c,u.r);
+      if(u.hp<=0)return;
+      const hc=this.hexCenter(u.c,u.r);
       const ut=UNIT_TYPES[u.type];
-      const isPlayer=u.owner===0;
-      const grd=ctx.createRadialGradient(hc.x,hc.y-3,2,hc.x,hc.y,14);
-      grd.addColorStop(0,isPlayer?'#4ecca3':'#e94560');
-      grd.addColorStop(1,isPlayer?'#2a8a6a':'#a03040');
-      ctx.beginPath();
-      ctx.arc(hc.x,hc.y,13,0,Math.PI*2);
-      ctx.fillStyle=grd;
-      ctx.fill();
-      ctx.strokeStyle=isPlayer?'#8aecc3':'#ff7a7a';
-      ctx.lineWidth=2;
-      ctx.stroke();
+      const isP=u.owner===0;
+      const r=Math.max(8,this.HEX_R*0.35);
+      const grd=ctx.createRadialGradient(hc.x,hc.y-r*0.2,1,hc.x,hc.y,r);
+      grd.addColorStop(0,isP?'#4ecca3':'#e94560');
+      grd.addColorStop(1,isP?'#2a8a6a':'#a03040');
+      ctx.beginPath();ctx.arc(hc.x,hc.y,r,0,Math.PI*2);
+      ctx.fillStyle=grd;ctx.fill();
+      ctx.strokeStyle=isP?'#8aecc3':'#ff7a7a';
+      ctx.lineWidth=1.5;ctx.stroke();
 
-      ctx.font='14px sans-serif';
-      ctx.textAlign='center';
-      ctx.textBaseline='middle';
-      ctx.fillText(ut.icon,hc.x,hc.y-1);
+      ctx.font=`${r*1.1}px sans-serif`;
+      ctx.textAlign='center';ctx.textBaseline='middle';
+      ctx.fillText(ut.icon,hc.x,hc.y);
 
-      const bw=24, bh=3;
-      const bx=hc.x-bw/2, by=hc.y+14;
-      ctx.fillStyle='#333';
-      ctx.fillRect(bx,by,bw,bh);
+      const bw=r*1.8,bh=2.5;
+      ctx.fillStyle='rgba(0,0,0,0.5)';
+      ctx.fillRect(hc.x-bw/2,hc.y+r+2,bw,bh);
       ctx.fillStyle=u.hp/u.maxHp>0.5?'#4ecca3':u.hp/u.maxHp>0.25?'#f0c040':'#e94560';
-      ctx.fillRect(bx,by,bw*(u.hp/u.maxHp),bh);
+      ctx.fillRect(hc.x-bw/2,hc.y+r+2,bw*(u.hp/u.maxHp),bh);
     });
 
-    ctx.restore();
+    // Highlight selected tile for recruitment
+    if(this.selectedTile){
+      const hc=this.hexCenter(this.selectedTile.c,this.selectedTile.r);
+      ctx.beginPath();
+      const p=this.hexPoints(hc.x,hc.y);
+      ctx.moveTo(p[0].x,p[0].y);
+      for(let i=1;i<6;i++)ctx.lineTo(p[i].x,p[i].y);
+      ctx.closePath();
+      ctx.strokeStyle='#f0c040';
+      ctx.lineWidth=2;ctx.setLineDash([4,4]);ctx.stroke();ctx.setLineDash([]);
+      // Show recruit hint
+      ctx.font='11px sans-serif';
+      ctx.fillStyle='#f0c040';
+      ctx.textAlign='center';
+      ctx.fillText('👆选择兵种',hc.x,hc.y-this.HEX_R-6);
+    }
+  }
+
+  renderLoop(){
+    if(!this.rafId)this.render();
+    this.rafId=requestAnimationFrame(()=>this.renderLoop());
+  }
+
+  // ===== RESIZE =====
+  resize(){
+    const dpr=window.devicePixelRatio||1;
+    const {w,h}=this.getCSSSize();
+    if(Math.abs((this.canvas.width||0)-w*dpr)<2&&Math.abs((this.canvas.height||0)-h*dpr)<2)return;
+    this.canvas.width=w*dpr;
+    this.canvas.height=h*dpr;
+    this.ctx.setTransform(dpr,0,0,dpr,0,0);
+    this.calcLayout();
+    this.render();
   }
 
   // ===== EVENTS =====
   bindEvents(){
-    const canvas=this.canvas;
     const getPos=e=>{
-      const rect=canvas.getBoundingClientRect();
-      if(e.touches) return {x:e.touches[0].clientX-rect.left,y:e.touches[0].clientY-rect.top};
-      return {x:e.clientX-rect.left,y:e.clientY-rect.top};
+      const r=this.canvas.getBoundingClientRect();
+      if(e.touches)return {x:e.touches[0].clientX-r.left,y:e.touches[0].clientY-r.top};
+      return {x:e.clientX-r.left,y:e.clientY-r.top};
     };
     const handleClick=e=>{
+      if(!this.isRunning||this.phase!=='play'||this.currentPlayer!==0)return;
       e.preventDefault();
-      if(!this.isRunning||this.phase==='gameover') return;
-      if(this.currentPlayer!==0) return;
       const pos=getPos(e);
       const hex=this.pxToHex(pos.x,pos.y);
-      if(!hex) return this.deselect();
+      if(!hex)return this.deselect();
 
       const unit=this.units.find(u=>u.c===hex.c&&u.r===hex.r&&u.owner===0);
-      if(unit) return this.selectUnit(unit);
+      if(unit)return this.selectUnit(unit);
 
       const hl=this.highlightedTiles.find(h=>h.c===hex.c&&h.r===hex.r);
-      if(hl && this.selectedUnit){
-        if(hl.action==='move') this.moveUnit(this.selectedUnit,hex.c,hex.r);
-        else if(hl.action==='attack' && hl.unit) this.attackUnit(this.selectedUnit,hl.unit);
+      if(hl&&this.selectedUnit){
+        if(hl.action==='move')this.moveUnit(this.selectedUnit,hex.c,hex.r);
+        else if(hl.action==='attack'&&hl.unit)this.attackUnit(this.selectedUnit,hl.unit);
         return;
       }
       const tile=this.grid[hex.r][hex.c];
-      if(tile.city!==null && tile.owner===0) this.selectedTile=hex;
+      if(tile.city!==null&&tile.owner===0)this.selectedTile=hex;
       this.deselect();
     };
 
-    canvas.addEventListener('click',handleClick);
-    canvas.addEventListener('touchstart',handleClick,{passive:false});
+    this.canvas.addEventListener('click',handleClick);
+    this.canvas.addEventListener('touchstart',handleClick,{passive:false});
 
-    document.querySelectorAll('.unitBtn').forEach(btn=>{
-      btn.addEventListener('click',()=>{
-        if(!this.isRunning||this.currentPlayer!==0||this.phase!=='play') return;
-        if(!this.selectedTile) return;
-        this.spawnUnit(this.selectedTile.c,this.selectedTile.r,btn.dataset.type);
+    document.querySelectorAll('.unitBtn').forEach(b=>{
+      b.addEventListener('click',()=>{
+        if(!this.isRunning||this.currentPlayer!==0||this.phase!=='play')return;
+        if(!this.selectedTile)return;
+        this.spawnUnit(this.selectedTile.c,this.selectedTile.r,b.dataset.type);
       });
     });
 
-    document.getElementById('endTurnBtn').addEventListener('click',()=>{
-      if(this.isRunning) this.endTurn();
-    });
+    document.getElementById('endTurnBtn').addEventListener('click',()=>this.endTurn());
 
-    window.addEventListener('resize',()=>{if(this.isRunning){this.resize();this.render();}});
-    setTimeout(()=>{if(this.isRunning){this.resize();this.render();}},100);
+    // ResizeObserver for container resize
+    const ro=new ResizeObserver(()=>{this.resize();});
+    ro.observe(this.canvas.parentElement);
+    setTimeout(()=>this.resize(),50);
   }
 }
 
