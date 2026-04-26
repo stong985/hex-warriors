@@ -226,7 +226,7 @@ document.getElementById('tutNext').addEventListener('click',()=>{
   else{
     tutorial.classList.remove('show');
     tutStep=0;
-    if(game)game.resize();
+    if(game)game.render();
   }
 });
 showTutStep();
@@ -674,7 +674,7 @@ class Game{
   resize(){
     const dpr=window.devicePixelRatio||1;
     const {w,h}=this.getCSSSize();
-    if(Math.abs((this.canvas.width||0)-w*dpr)<2&&Math.abs((this.canvas.height||0)-h*dpr)<2)return;
+    if(!w||!h)return;
     this.canvas.width=w*dpr;
     this.canvas.height=h*dpr;
     this.ctx.setTransform(dpr,0,0,dpr,0,0);
