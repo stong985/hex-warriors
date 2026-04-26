@@ -223,7 +223,11 @@ function showTutStep(){
 }
 document.getElementById('tutNext').addEventListener('click',()=>{
   if(tutStep<tutSteps.length-1){tutStep++;showTutStep();}
-  else{tutorial.classList.remove('show');tutStep=0;}
+  else{
+    tutorial.classList.remove('show');
+    tutStep=0;
+    if(game)game.resize();
+  }
 });
 showTutStep();
 
@@ -662,7 +666,7 @@ class Game{
   }
 
   renderLoop(){
-    if(!this.rafId)this.render();
+    this.render();
     this.rafId=requestAnimationFrame(()=>this.renderLoop());
   }
 
