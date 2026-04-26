@@ -195,7 +195,7 @@ function startGame(load){
     if(load)game.loadFromSave();
     else game.reset();
     // Wait for layout then resize canvas
-    requestAnimationFrame(()=>requestAnimationFrame(()=>game.resize()));
+    requestAnimationFrame(()=>requestAnimationFrame(()=>game.render()));
   }
 }
 
@@ -573,6 +573,7 @@ class Game{
 
   // ===== RENDER =====
   render(){
+    if(this._rendering) return; this._rendering=true;
     this.resize();
     const ctx=this.ctx;
     const {w,h}=this.getCSSSize();
@@ -681,7 +682,6 @@ class Game{
     this.canvas.height=h*dpr;
     this.ctx.setTransform(dpr,0,0,dpr,0,0);
     this.calcLayout();
-    this.render();
   }
 
   // ===== EVENTS =====
