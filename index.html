@@ -194,6 +194,8 @@ function startGame(load){
   if(game){
     if(load)game.loadFromSave();
     else game.reset();
+    // Wait for layout then resize canvas
+    requestAnimationFrame(()=>requestAnimationFrame(()=>game.resize()));
   }
 }
 
@@ -567,8 +569,10 @@ class Game{
 
   // ===== RENDER =====
   render(){
+    this.resize();
     const ctx=this.ctx;
     const {w,h}=this.getCSSSize();
+    if(!w||!h)return;
     ctx.clearRect(0,0,w,h);
 
     // Background
@@ -718,7 +722,6 @@ class Game{
     // ResizeObserver for container resize
     const ro=new ResizeObserver(()=>{this.resize();});
     ro.observe(this.canvas.parentElement);
-    setTimeout(()=>this.resize(),50);
   }
 }
 
