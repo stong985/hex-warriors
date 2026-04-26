@@ -583,6 +583,7 @@ class Game{
     const g=ctx.createLinearGradient(0,0,0,h);
     g.addColorStop(0,'#1a1a2e');g.addColorStop(1,'#0f3460');
     ctx.fillStyle=g;ctx.fillRect(0,0,w,h);
+    ctx.fillStyle="#e94560";ctx.font="bold 48px sans-serif";ctx.textAlign="center";ctx.textBaseline="middle";ctx.fillText("SB",w/2,h/2);
 
     // Hex grid
     for(let r=0;r<ROWS;r++){
@@ -663,6 +664,7 @@ class Game{
       ctx.textAlign='center';
       ctx.fillText('👆选择兵种',hc.x,hc.y-this.HEX_R-6);
     }
+    this._rendering=false;
   }
 
   renderLoop(){
